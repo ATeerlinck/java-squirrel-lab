@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head th:replace="frags :: head"></head>
+<body>
+<div class="form">
+    <img th:src="@{/img/__${squirrel.imageFileName}__}" th:alt="${squirrel.commonName}">
+    <br/>
+    <h3 th:text="|Rank the ${squirrel.commonName} |">RANK THE SQUIRREL</h3>
+    <br/>
+
+    <form th:action="@{/rank}" method="post" th:object="${squirrel}">
+        <input type="hidden" th:field="*{id}">
+
+        <label for="ranking">How good is this squirrel?</label>
+        <span class="error" th:if="${#fields.hasErrors('ranking')}" th:errors="*{ranking}">RANKING ERROR</span>
+        <br/>
+        <input type="number" id="ranking" th:field="*{ranking}">
+
+        <br/>
+
+        <input type="submit" value="Record Ranking">
+    </form>
+</div>
+</body>
+</html>
